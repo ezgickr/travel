@@ -17,7 +17,7 @@ public class PlaceController {
     @Autowired
     PlaceService placeService;
 
-    //http://localhost:8080/cities/city?cityName=Milan
+    //http://localhost:8080/cities/places?cityName=Milan
     @GetMapping("/cities/places")
     public List<Place> listPlacesByCity(@RequestParam String cityName){
         return placeService.listPlacesByCity(cityName);
