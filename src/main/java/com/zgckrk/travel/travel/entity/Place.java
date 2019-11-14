@@ -1,9 +1,12 @@
 package com.zgckrk.travel.travel.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Set;
 
+@Data
 @Entity
 public class Place {
     @Id
@@ -15,6 +18,10 @@ public class Place {
     @ManyToOne
     private City city;
 
+    @JsonIgnore
+    @ManyToMany(mappedBy = "visitedPlaces", fetch = FetchType.LAZY)
+    private Set<User> userList;
+
     public Place(){}
 
     public Place(String name, City city) {
@@ -22,19 +29,4 @@ public class Place {
         this.city = city;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public City getCity() {
-        return city;
-    }
-
-    public void setCity(City city) {
-        this.city = city;
-    }
 }

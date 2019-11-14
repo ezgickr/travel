@@ -1,10 +1,12 @@
 package com.zgckrk.travel.travel.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Set;
 
+@Data
 @Entity
 public class City {
     @Id
@@ -13,7 +15,7 @@ public class City {
     private String name;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "city", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "city", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Place> placeSet;
 
     public City(String name) {
@@ -22,19 +24,4 @@ public class City {
 
     public City(){}
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Set<Place> getPlaceSet() {
-        return placeSet;
-    }
-
-    public void setPlaceSet(Set<Place> placeSet) {
-        this.placeSet = placeSet;
-    }
 }
