@@ -1,11 +1,18 @@
 package com.zgckrk.travel.travel;
 
+import com.zgckrk.travel.travel.entity.Place;
+import com.zgckrk.travel.travel.entity.User;
 import com.zgckrk.travel.travel.service.CityService;
 import com.zgckrk.travel.travel.service.PlaceService;
+import com.zgckrk.travel.travel.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 @SpringBootApplication
 public class TravelApplication implements CommandLineRunner {
@@ -16,6 +23,9 @@ public class TravelApplication implements CommandLineRunner {
 	@Autowired
 	PlaceService placeService;
 
+	@Autowired
+	UserService userService;
+
 	public static void main(String[] args) {
 
 	    SpringApplication.run(TravelApplication.class, args);
@@ -25,6 +35,8 @@ public class TravelApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception{
 		insertCities();
 		insertPlaces();
+		insertUser();
+        addPlaceToUser();
 	}
 
 	public void insertCities(){
@@ -53,5 +65,20 @@ public class TravelApplication implements CommandLineRunner {
 
 
 	}
+
+	public void insertUser(){
+	    userService.createUser("Sally","1234");
+	    userService.createUser("Dolly","2345");
+	    userService.createUser("Cat","3456");
+    }
+
+    public  void addPlaceToUser(){
+        ArrayList<Place> places = new ArrayList<>();
+        Place place = new Place();
+        place.setId(new Long(1));
+        places.add(place);
+        Long userId= new Long(1);
+        userService.addPlaceToUser(userId,places);
+    }
 
 }

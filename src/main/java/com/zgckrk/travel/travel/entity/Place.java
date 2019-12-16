@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Data
@@ -20,7 +21,7 @@ public class Place {
 
     @JsonIgnore
     @ManyToMany(mappedBy = "visitedPlaces", fetch = FetchType.LAZY)
-    private Set<User> userList;
+    private Set<User> userList=new HashSet<>();
 
     public Place(){}
 

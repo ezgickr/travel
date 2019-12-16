@@ -26,7 +26,7 @@ public class User {
             inverseJoinColumns = {
                     @JoinColumn(name = "place_id", referencedColumnName = "id",
                             nullable = false, updatable = false)})
-    private Set<Place> visitedPlaces;
+    private Set<Place> visitedPlaces= new HashSet<>();
 
     public User() {}
 
